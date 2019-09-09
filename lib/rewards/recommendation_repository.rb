@@ -3,24 +3,14 @@
 module Rewards
   # Recommendation store and access
   class RecommendationRepository
-    RecommendationRepositoryError = Class.new(StandardError)
-    RecommendationNotFoundError = Class.new(RecommendationRepositoryError)
-
     def initialize
       @recommendations = []
     end
 
-    def find_by_recommended_name(recommended_name)
-      recommendation = @recommendations.find do |recommendation|
+    def select_by_recommended_name(recommended_name)
+      all.select do |recommendation|
         recommendation.recommended_name == recommended_name
       end
-
-      unless recommendation
-        raise RecommendationNotFoundError,
-              "No Recommendation for #{recommended_name}"
-      end
-
-      recommendation
     end
 
     def create(**args)
@@ -30,7 +20,7 @@ module Rewards
     end
 
     def all
-      @recommendations
+      @recommendations.sort_by(&:created_at)
     end
   end
 end

@@ -11,12 +11,29 @@ describe Rewards::RecommendationRepository do
 
   let(:recommendation_a_b) do
     Rewards::Recommendation.new(
+      created_at: DateTime.parse('2018-06-19 09:41'),
       customer: Rewards::Customer.new('A'),
       recommended_name: 'B'
     )
   end
+  let(:recommendation_d_b) do
+    Rewards::Recommendation.new(
+      created_at: DateTime.parse('2018-06-15 09:41'),
+      customer: Rewards::Customer.new('D'),
+      recommended_name: 'B'
+    )
+  end
+  let(:recommendation_x_y) do
+    Rewards::Recommendation.new(
+      created_at: DateTime.parse('2018-06-17 09:41'),
+      customer: Rewards::Customer.new('X'),
+      recommended_name: 'Y'
+    )
+  end
 
-  let(:recommendations) { [recommendation_a_b] }
+  let(:recommendations) do
+    [recommendation_a_b, recommendation_d_b, recommendation_x_y]
+  end
 
   describe '.new' do
     subject(:recommendation_repo) { Rewards::RecommendationRepository.new }
@@ -28,25 +45,29 @@ describe Rewards::RecommendationRepository do
     end
   end
 
-  describe '#find_by_recommended_name' do
+  describe '#select_by_recommended_name' do
     let(:recommended_name) { 'B' }
 
-    it 'returns recommendation with given recommended_name' do
-      recommendation = recommendation_repo
-        .find_by_recommended_name(recommended_name)
+    it 'returns recommendations with given recommended_name' do
+      expect(
+        recommendation_repo.select_by_recommended_name(recommended_name)
+      ).to match_array([recommendation_a_b, recommendation_d_b])
+    end
 
-      expect(recommendation).to be(recommendation_a_b)
+    it 'returns recommendations sorted from newest to latest by create_at' do
+      recommendation = recommendation_repo
+        .select_by_recommended_name(recommended_name)
+
+      expect(recommendation.first).to eq(recommendation_d_b)
     end
 
     context 'when recommendation does NOT exist' do
       let(:recommended_name) { 'D' }
 
-      it 'raises RecommendationNotFoundError' do
-        expect {
-          recommendation_repo.find_by_recommended_name(recommended_name)
-        }.to raise_error(
-          Rewards::RecommendationRepository::RecommendationNotFoundError
-        )
+      it 'returns empty array' do
+        expect(
+          recommendation_repo.select_by_recommended_name(recommended_name)
+        ).to match_array([])
       end
     end
   end
@@ -67,7 +88,7 @@ describe Rewards::RecommendationRepository do
 
       expect(
         recommendation_repo.instance_variable_get('@recommendations').count
-      ).to eq(2)
+      ).to eq(4)
     end
 
     context 'when no customer given' do
@@ -93,7 +114,11 @@ describe Rewards::RecommendationRepository do
 
   describe '#all' do
     it 'returns recommendations array' do
-      expect(recommendation_repo.all).to match(recommendations)
+      expect(recommendation_repo.all).to match_array(recommendations)
+    end
+
+    it 'returns recommendations sorted from newest to latest by create_at' do
+      expect(recommendation_repo.all.first).to eq(recommendation_d_b)
     end
   end
 end
