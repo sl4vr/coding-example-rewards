@@ -18,6 +18,9 @@ gem 'rake', require: false # avoid namespace conflict
 # DSL for quickly creating web applications
 gem 'sinatra', '2.0.5'
 
+# All awesome rails features
+gem 'activesupport', '5.2.3'
+
 group :development, :test do
   # Manager for Procfile-based applications
   gem 'foreman', '>= 0.85.0'

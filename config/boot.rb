@@ -2,6 +2,7 @@
 
 require 'rubygems'
 require 'sinatra'
+require 'active_support/all'
 
 ENV['ROOT_PATH'] = File.expand_path('../', File.dirname(__FILE__))
 require File.expand_path('application.rb', ENV['ROOT_PATH'])
