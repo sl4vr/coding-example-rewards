@@ -61,6 +61,16 @@ describe Rewards::CustomerRepository do
         }.to raise_error(Rewards::CustomerRepository::CustomerExistsError)
       end
     end
+
+    context 'when no name given' do
+      let(:name) { nil }
+
+      it 'raises CustomerError' do
+        expect {
+          customer_repo.create(name)
+        }.to raise_error(Rewards::Customer::CustomerError)
+      end
+    end
   end
 
   describe '#find_or_create' do
