@@ -35,10 +35,10 @@ describe Rewards::CustomerRepository do
     context 'when customer does NOT exist' do
       let(:name) { 'D' }
 
-      it 'raises CustomerNotFoundError' do
-        expect {
-          customer_repo.find(name)
-        }.to raise_error(Rewards::CustomerRepository::CustomerNotFoundError)
+      it 'returns nil' do
+        customer = customer_repo.find(name)
+
+        expect(customer).to be_nil
       end
     end
   end
@@ -103,7 +103,7 @@ describe Rewards::CustomerRepository do
 
   describe '#all' do
     it 'returns customers array' do
-      expect(customer_repo.all).to match(customers)
+      expect(customer_repo.all).to match_array(customers)
     end
   end
 end
