@@ -54,7 +54,7 @@ describe Rewards::RecommendationRepository do
       ).to match_array([recommendation_a_b, recommendation_d_b])
     end
 
-    it 'returns recommendations sorted from newest to latest by create_at' do
+    it 'returns recommendations sorted from latest to newest by created_at' do
       recommendation = recommendation_repo
         .select_by_recommended_name(recommended_name)
 
