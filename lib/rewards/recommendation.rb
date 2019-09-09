@@ -7,8 +7,8 @@ module Rewards
     NoCustomerError = Class.new(RecommendationError)
     NoRecommendedNameError = Class.new(RecommendationError)
 
-    attr_reader :created_at, :customer, :recommended_name,
-      :recommended_customer, :active
+    attr_reader :created_at, :customer, :recommended_name
+    attr_accessor :recommended_customer, :active
 
     def initialize(customer:, recommended_name:, created_at: nil)
       if customer.blank?
