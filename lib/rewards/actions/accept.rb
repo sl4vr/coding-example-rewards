@@ -18,19 +18,21 @@ module Rewards
 
       def perform(customers:, recommendations:)
         customer = customers.create(@customer_name)
-        recommendations = recommendations
+        selected_recommendations = recommendations
           .select_by_recommended_name(@customer_name)
 
-        if recommendations.empty?
+        if selected_recommendations.empty?
           raise NoRecommendationsError,
                 "No recommendations for #{@customer_name}"
         end
 
-        recommendations.each do |recommendation|
+        selected_recommendations.each do |recommendation|
           recommendation.recommended_customer = customer
         end
 
-        recommendations.first.active = true
+        selected_recommendations.first.active = true
+
+        Rewarder.new(customer, recommendations: recommendations).reward
       rescue Customer::CustomerError => error
         raise CustomerCreationError, error.message
       end

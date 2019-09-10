@@ -77,7 +77,22 @@ describe Rewards::Actions::Accept do
       expect(recommendation_b_d.active).to be(true)
     end
 
-    pending 'rewards all customers in recommendation chain'
+    it 'runs rewarder for new customer' do
+      customer_d = customer_repo.create('D')
+      expect(customer_repo).to receive(:create).and_return(customer_d)
+
+      expect(Rewards::Rewarder).to receive(:new)
+        .with(customer_d, recommendations: recommendation_repo)
+        .and_return(
+          Rewards::Rewarder.new(
+            customer_d,
+            recommendations: recommendation_repo
+            )
+          )
+      expect_any_instance_of(Rewards::Rewarder).to receive(:reward)
+
+      action_perform
+    end
 
     context 'when no customer name given' do
       let(:recommended_name) { nil }
