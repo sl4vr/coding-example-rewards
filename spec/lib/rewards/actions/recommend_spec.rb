@@ -70,10 +70,13 @@ describe Rewards::Actions::Recommend do
     context 'when no such customer' do
       let(:customer_name) { 'X' }
 
-      it 'raises CustomerNotFoundError' do
-        expect{
-          action_perform
-        }.to raise_error(Rewards::Actions::Recommend::CustomerNotFoundError)
+      it 'creates recommendation with data provided' do
+        action_perform
+
+        recommendation = recommendation_repo.all.last
+
+        expect(recommendation.recommended_name).to eq(recommended_name)
+        expect(recommendation.created_at).to eq(created_at)
       end
     end
 
@@ -84,7 +87,7 @@ describe Rewards::Actions::Recommend do
         expect{
           action_perform
         }.to raise_error(
-          Rewards::Actions::Recommend::CustomerNotFoundError
+          Rewards::Actions::Recommend::RecommendationCreationError
         )
       end
     end

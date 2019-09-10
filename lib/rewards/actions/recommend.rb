@@ -18,7 +18,7 @@ module Rewards
       end
 
       def perform(customers:, recommendations:)
-        customer = customers.find(@customer_name)
+        customer = customers.find_or_create(@customer_name)
 
         unless customer
           raise CustomerNotFoundError, "Customer #{@customer_name} not found"
@@ -29,7 +29,8 @@ module Rewards
           recommended_name: @recommended_name,
           created_at: @created_at
         )
-      rescue Recommendation::RecommendationError => error
+      rescue Recommendation::RecommendationError,
+             Customer::NoNameError => error
         raise RecommendationCreationError, error.message
       end
     end
