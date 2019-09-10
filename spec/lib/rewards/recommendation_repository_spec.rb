@@ -72,7 +72,39 @@ describe Rewards::RecommendationRepository do
     end
   end
 
-  pending '#select_active_by_recommended_name'
+  describe '#select_active_by_recommended' do
+    let(:customer_b) { Rewards::Customer.new('B') }
+    let(:customer_y) { Rewards::Customer.new('Y') }
+
+    let(:recommendation_a_b) do
+      recommendation = super()
+      recommendation.recommended_customer = customer_b
+      recommendation.active = true
+      recommendation
+    end
+    let(:recommendation_d_b) do
+      recommendation = super()
+      recommendation.recommended_customer = customer_b
+      recommendation.active = false
+      recommendation
+    end
+    let(:recommendation_x_y) do
+      recommendation = super()
+      recommendation.recommended_customer = customer_y
+      recommendation.active = true
+      recommendation
+    end
+
+    subject(:select_active_by_recommended) do
+      recommendation_repo.select_active_by_recommended(customer_b)
+    end
+
+    it { is_expected.to be_kind_of(Array) }
+
+    it 'returns array of active recommendations for customer' do
+      is_expected.to match_array([recommendation_a_b])
+    end
+  end
 
   describe '#create' do
     let(:customer) { Rewards::Customer.new('A') }
