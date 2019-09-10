@@ -13,6 +13,12 @@ module Rewards
       end
     end
 
+    def select_active_by_recommended(customer)
+      all.select do |recommendation|
+        recommendation.recommended_customer == customer && recommendation.active
+      end
+    end
+
     def create(**args)
       recommendation = Recommendation.new(**args)
       @recommendations << recommendation

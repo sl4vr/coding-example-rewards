@@ -72,6 +72,8 @@ describe Rewards::RecommendationRepository do
     end
   end
 
+  pending '#select_active_by_recommended_name'
+
   describe '#create' do
     let(:customer) { Rewards::Customer.new('A') }
     let(:recommended_name) { 'D' }
