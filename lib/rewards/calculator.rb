@@ -10,10 +10,10 @@ module Rewards
     end
 
     def calculate
-      actions = @parser.parse
+      actions_params = @parser.parse
 
-      actions.sort_by(&:created_at).each do |action|
-        perform_action(action)
+      actions_params.sort_by(&:created_at).each do |params|
+        perform_action(params)
       end
 
       @customers.all.each_with_object({}) do |customer, hash|
@@ -23,7 +23,14 @@ module Rewards
 
     private
 
-    def perform_action(action)
+    def perform_action(params)
+      action =
+        case params
+        when Params::Accept
+          Actions::Accept.new(params: params.to_h)
+        when Params::Recommend
+          Actions::Recommend.new(params: params.to_h)
+        end
       action.perform(customers: @customers, recommendations: @recommendations)
     rescue  Actions::Accept::AcceptError,
             Actions::Recommend::RecommendError

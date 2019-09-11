@@ -11,7 +11,7 @@ describe Rewards::Parser do
 
     it { is_expected.to be_kind_of(Array) }
 
-    it { is_expected.to all(be_kind_of(Rewards::Actions::Base)) }
+    it { is_expected.to all(respond_to(:to_h)) }
 
     context 'when there are lines with wrong format' do
       let(:input) do

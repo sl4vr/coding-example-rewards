@@ -40,7 +40,11 @@ describe Rewards::Actions::Accept do
 
   let(:recommended_name) { 'D' }
   subject(:action) do
-    Rewards::Actions::Accept.new(customer_name: recommended_name)
+    Rewards::Actions::Accept.new(
+      params: {
+        customer_name: recommended_name
+      }
+    )
   end
 
   describe '#perform' do

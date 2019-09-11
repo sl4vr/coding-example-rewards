@@ -1,20 +1,17 @@
 # frozen_string_literal: true
 
-require_relative 'base'
-
 module Rewards
   module Actions
     # Recommendation of one customer by another one
-    class Recommend < Base
+    class Recommend
       RecommendError = Class.new(StandardError)
       CustomerNotFoundError = Class.new(RecommendError)
       RecommendationCreationError = Class.new(RecommendError)
 
-      def initialize(**args)
-        super(**args)
-
-        @customer_name = args[:customer_name]
-        @recommended_name = args[:recommended_name]
+      def initialize(params:)
+        @created_at = params[:created_at] || Time.now
+        @customer_name = params[:customer_name]
+        @recommended_name = params[:recommended_name]
       end
 
       def perform(customers:, recommendations:)

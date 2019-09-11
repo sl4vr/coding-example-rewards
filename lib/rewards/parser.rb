@@ -24,13 +24,13 @@ module Rewards
 
       case type
       when 'recommends'
-        Actions::Recommend.new(
+        Params::Recommend.new(
           created_at: datetime,
           customer_name: object,
           recommended_name: subject
         )
       when 'accepts'
-        Actions::Accept.new(
+        Params::Accept.new(
           created_at: datetime,
           customer_name: object
         )

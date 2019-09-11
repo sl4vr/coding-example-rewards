@@ -43,9 +43,11 @@ describe Rewards::Actions::Recommend do
   let(:created_at) { DateTime.parse('2018-06-22 09:41') }
   subject(:action) do
     Rewards::Actions::Recommend.new(
-      customer_name: customer_name,
-      recommended_name: recommended_name,
-      created_at: created_at
+      params: {
+        customer_name: customer_name,
+        recommended_name: recommended_name,
+        created_at: created_at
+      }
     )
   end
 

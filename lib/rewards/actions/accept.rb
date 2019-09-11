@@ -1,19 +1,16 @@
 # frozen_string_literal: true
 
-require_relative 'base'
-
 module Rewards
   module Actions
     # Acceptance of invitation by new customer
-    class Accept < Base
+    class Accept
       AcceptError = Class.new(StandardError)
       NoRecommendationsError = Class.new(AcceptError)
       CustomerCreationError = Class.new(AcceptError)
 
-      def initialize(**args)
-        super(**args)
-
-        @customer_name = args[:customer_name]
+      def initialize(params:)
+        @created_at = params[:created_at] || Time.now
+        @customer_name = params[:customer_name]
       end
 
       def perform(customers:, recommendations:)
