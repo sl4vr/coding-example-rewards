@@ -5,11 +5,10 @@ require 'spec_helper'
 describe Rewards::Calculator do
   let(:customer_repo) { Rewards::CustomerRepository.new }
   let(:recommendation_repo) { Rewards::RecommendationRepository.new }
-  let(:parser) { Rewards::Parser }
+  let(:parser) { Rewards::Parser.new(input) }
 
   subject(:calculator) do
     Rewards::Calculator.new(
-      input: input,
       parser: parser,
       customers: customer_repo,
       recommendations: recommendation_repo

@@ -12,10 +12,9 @@ class Application < Sinatra::Base
 
     customer_repository = Rewards::CustomerRepository.new
     recommendation_repository = Rewards::RecommendationRepository.new
-    log_parser = Rewards::Parser
+    log_parser = Rewards::Parser.new(log)
 
     calculator = Rewards::Calculator.new(
-      input: log,
       parser: log_parser,
       customers: customer_repository,
       recommendations: recommendation_repository

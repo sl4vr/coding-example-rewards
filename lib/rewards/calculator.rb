@@ -3,15 +3,14 @@
 module Rewards
   # Calculates reward for customers in actions log
   class Calculator
-    def initialize(input:, parser:, customers:, recommendations:)
-      @input = input
+    def initialize(parser:, customers:, recommendations:)
       @parser = parser
       @customers = customers
       @recommendations = recommendations
     end
 
     def calculate
-      actions = @parser.new(@input).parse
+      actions = @parser.parse
 
       actions.sort_by(&:created_at).each do |action|
         perform_action(action)
