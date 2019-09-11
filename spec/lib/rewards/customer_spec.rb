@@ -21,7 +21,7 @@ describe Rewards::Customer do
       let(:name) { nil }
 
       it 'raises NoNameError' do
-        expect {subject}.to raise_error(Rewards::Customer::NoNameError)
+        expect { subject }.to raise_error(Rewards::Customer::NoNameError)
       end
     end
   end

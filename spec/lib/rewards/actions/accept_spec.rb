@@ -42,7 +42,7 @@ describe Rewards::Actions::Accept do
   subject(:action) do
     Rewards::Actions::Accept.new(customer_name: recommended_name)
   end
-  
+
   describe '#perform' do
     subject(:action_perform) do
       action.perform(
@@ -98,7 +98,7 @@ describe Rewards::Actions::Accept do
       let(:recommended_name) { nil }
 
       it 'raises CustomerCreationError' do
-        expect{
+        expect {
           action_perform
         }.to raise_error(Rewards::Actions::Accept::CustomerCreationError)
       end
@@ -108,7 +108,7 @@ describe Rewards::Actions::Accept do
       let(:recommendations) { [] }
 
       it 'raises NoRecommendationsError' do
-        expect{
+        expect {
           action_perform
         }.to raise_error(Rewards::Actions::Accept::NoRecommendationsError)
       end

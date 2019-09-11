@@ -79,13 +79,13 @@ describe Rewards::CustomerRepository do
 
       it 'creates customer and stores it in repository' do
         customer_repo.find_or_create(name)
-  
+
         expect(customer_repo.instance_variable_get('@customers').count).to eq(4)
       end
 
       it 'returns customer with given name' do
         customer = customer_repo.find_or_create(name)
-  
+
         expect(customer.name).to be(name)
       end
     end
@@ -95,7 +95,7 @@ describe Rewards::CustomerRepository do
 
       it 'returns customer with given name' do
         customer = customer_repo.find_or_create(name)
-  
+
         expect(customer).to be(customer_a)
       end
     end

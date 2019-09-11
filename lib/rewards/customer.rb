@@ -19,7 +19,7 @@ module Rewards
     def add_score(score)
       unless score.is_a?(Numeric)
         raise NonNumericScoreError,
-              "Score must be Numeric, but instead is #{score.class}" 
+              "Score must be Numeric, but instead is #{score.class}"
       end
 
       @score += score

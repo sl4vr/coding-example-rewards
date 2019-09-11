@@ -48,7 +48,7 @@ describe Rewards::Actions::Recommend do
       created_at: created_at
     )
   end
-  
+
   describe '#perform' do
     subject(:action_perform) do
       action.perform(
@@ -84,7 +84,7 @@ describe Rewards::Actions::Recommend do
       let(:customer_name) { nil }
 
       it 'raises CustomerNotFoundError' do
-        expect{
+        expect {
           action_perform
         }.to raise_error(
           Rewards::Actions::Recommend::RecommendationCreationError
@@ -96,7 +96,7 @@ describe Rewards::Actions::Recommend do
       let(:recommended_name) { nil }
 
       it 'raises RecommendationCreationError' do
-        expect{
+        expect {
           action_perform
         }.to raise_error(
           Rewards::Actions::Recommend::RecommendationCreationError
@@ -109,9 +109,9 @@ describe Rewards::Actions::Recommend do
 
       it 'creates recommendation with created_at == Time.now' do
         action_perform
-  
+
         recommendation = recommendation_repo.all.last
-  
+
         expect(recommendation.customer).to eq(customer_a)
         expect(recommendation.recommended_name).to eq(recommended_name)
         expect(recommendation.created_at).not_to be_nil

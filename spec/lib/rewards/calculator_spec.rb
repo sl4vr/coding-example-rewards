@@ -15,14 +15,14 @@ describe Rewards::Calculator do
       recommendations: recommendation_repo
     )
   end
-  
+
   describe '#calculate' do
     subject { calculator.calculate }
 
     context 'when regular input' do
       let(:input) { File.read("#{ENV['ROOT_PATH']}/spec/fixtures/input.txt") }
 
-      it { is_expected.to eq({ 'A' => 1.75, 'B' => 1.5, 'C' => 1 }) }
+      it { is_expected.to eq({'A' => 1.75, 'B' => 1.5, 'C' => 1}) }
     end
 
     context 'when polluted input' do
@@ -30,7 +30,7 @@ describe Rewards::Calculator do
         File.read("#{ENV['ROOT_PATH']}/spec/fixtures/polluted_input.txt")
       end
 
-      it { is_expected.to eq({ 'A' => 1.75, 'B' => 1.5, 'C' => 1 }) }
+      it { is_expected.to eq({'A' => 1.75, 'B' => 1.5, 'C' => 1}) }
     end
 
     context 'when extended input' do
@@ -39,7 +39,7 @@ describe Rewards::Calculator do
       end
 
       it { is_expected.to eq(
-        { 'A' => 2.375, 'B' => 2.75, 'C' => 1.5, 'D' => 1.0}
+        {'A' => 2.375, 'B' => 2.75, 'C' => 1.5, 'D' => 1.0}
       ) }
     end
   end

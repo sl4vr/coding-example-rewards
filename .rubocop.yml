@@ -1,0 +1,111 @@
+AllCops:
+  TargetRubyVersion: 2.6.3
+  DisabledByDefault: true
+  Exclude:
+    - tmp/**/*
+
+Bundler:
+  Enabled: true
+Gemspec:
+  Enabled: true
+Security:
+  Enabled: true
+
+Layout/MultilineBlockLayout:
+  Enabled: false
+Layout/MultilineHashBraceLayout:
+  Enabled: true
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: true
+Layout/MultilineMethodCallIndentation:
+  Enabled: true
+  EnforcedStyle: indented
+Layout/MultilineMethodDefinitionBraceLayout:
+  Enabled: true
+Layout/MultilineOperationIndentation:
+  Enabled: true
+Layout/RescueEnsureAlignment:
+  Enabled: true
+Layout/SpaceAfterColon:
+  Enabled: true
+Layout/SpaceAfterComma:
+  Enabled: true
+Layout/SpaceAfterMethodName:
+  Enabled: true
+Layout/SpaceAfterNot:
+  Enabled: true
+Layout/SpaceAfterSemicolon:
+  Enabled: true
+Layout/SpaceAroundBlockParameters:
+  Enabled: true
+Layout/SpaceAroundEqualsInParameterDefault:
+  Enabled: true
+Layout/SpaceAroundKeyword:
+  Enabled: true
+Layout/SpaceAroundOperators:
+  Enabled: true
+Layout/SpaceBeforeBlockBraces:
+  Enabled: true
+Layout/SpaceBeforeComma:
+  Enabled: true
+Layout/SpaceBeforeComment:
+  Enabled: true
+Layout/SpaceBeforeFirstArg:
+  Enabled: true
+Layout/SpaceBeforeSemicolon:
+  Enabled: true
+Layout/SpaceInLambdaLiteral:
+  Enabled: true
+Layout/SpaceInsideArrayLiteralBrackets:
+  Enabled: true
+Layout/SpaceInsideArrayPercentLiteral:
+  Enabled: true
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+  EnforcedStyle: space
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+  EnforcedStyle: no_space
+Layout/SpaceInsideParens:
+  Enabled: true
+Layout/SpaceInsidePercentLiteralDelimiters:
+  Enabled: true
+Layout/SpaceInsideRangeLiteral:
+  Enabled: true
+Layout/SpaceInsideReferenceBrackets:
+  Enabled: true
+Layout/SpaceInsideStringInterpolation:
+  Enabled: true
+Layout/Tab:
+  Enabled: true
+Layout/TrailingBlankLines:
+  Enabled: true
+  EnforcedStyle: final_newline
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Metrics/LineLength:
+  Enabled: true
+  Max: 80
+
+Style/AccessModifierDeclarations:
+  Enabled: true
+Style/Alias:
+  Enabled: true
+  EnforcedStyle: prefer_alias_method
+Style/AndOr:
+  Enabled: false
+Style/ArrayJoin:
+  Enabled: true
+Style/AsciiComments:
+  Enabled: true
+Style/Attr:
+  Enabled: true
+Style/AutoResourceCleanup:
+  Enabled: true
+Style/BarePercentLiterals:
+  Enabled: true
+Style/BeginBlock:
+  Enabled: true
+Style/BlockComments:
+  Enabled: true

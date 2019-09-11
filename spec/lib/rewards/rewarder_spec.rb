@@ -50,19 +50,19 @@ describe Rewards::Rewarder do
   subject(:rewarder) do
     Rewards::Rewarder.new(customer_c, recommendations: recommendation_repo)
   end
-  
+
   describe '#reward' do
     it 'rewards chain of recommenders' do
-      expect{ rewarder.reward }.to change(customer_b, :score).by(1.0)
-      expect{ rewarder.reward }.to change(customer_a, :score).by(0.5)
+      expect { rewarder.reward }.to change(customer_b, :score).by(1.0)
+      expect { rewarder.reward }.to change(customer_a, :score).by(0.5)
     end
 
     context 'when chain is broken' do
       before { recommendation_a_b.active = false }
 
       it 'rewards until recommendations exist' do
-        expect{ rewarder.reward }.to change(customer_b, :score).by(1.0)
-        expect{ rewarder.reward }.not_to change(customer_a, :score)
+        expect { rewarder.reward }.to change(customer_b, :score).by(1.0)
+        expect { rewarder.reward }.not_to change(customer_a, :score)
       end
     end
   end

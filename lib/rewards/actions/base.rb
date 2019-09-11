@@ -2,7 +2,7 @@
 
 module Rewards
   module Actions
-    # Abstract class, representing base Action interface 
+    # Abstract class, representing base Action interface
     class Base
       attr_reader :created_at
 
