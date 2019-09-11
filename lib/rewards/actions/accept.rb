@@ -8,12 +8,13 @@ module Rewards
       NoRecommendationsError = Class.new(AcceptError)
       CustomerCreationError = Class.new(AcceptError)
 
-      def initialize(params:, customers:, recommendations:)
+      def initialize(params:, customers:, recommendations:, rewarder:)
         @created_at = params[:created_at] || Time.now
         @customer_name = params[:customer_name]
 
         @customers = customers
         @recommendations = recommendations
+        @rewarder = rewarder
       end
 
       def perform
@@ -32,7 +33,7 @@ module Rewards
 
         recommendations.first.active = true
 
-        Rewarder.new(customer, recommendations: @recommendations).reward
+        @rewarder.reward_for(customer)
       rescue Customer::CustomerError => error
         raise CustomerCreationError, error.message
       end

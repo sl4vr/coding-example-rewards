@@ -6,12 +6,14 @@ describe Rewards::Calculator do
   let(:customer_repo) { Rewards::CustomerRepository.new }
   let(:recommendation_repo) { Rewards::RecommendationRepository.new }
   let(:parser) { Rewards::Parser.new(input) }
+  let(:rewarder) { Rewards::Rewarder.new(recommendation_repo) }
 
   subject(:calculator) do
     Rewards::Calculator.new(
       parser: parser,
       customers: customer_repo,
-      recommendations: recommendation_repo
+      recommendations: recommendation_repo,
+      rewarder: rewarder
     )
   end
 

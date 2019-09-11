@@ -3,8 +3,9 @@
 module Rewards
   # Calculates reward for customers in actions log
   class Calculator
-    def initialize(parser:, customers:, recommendations:)
+    def initialize(parser:, rewarder:, customers:, recommendations:)
       @parser = parser
+      @rewarder = rewarder
       @customers = customers
       @recommendations = recommendations
     end
@@ -30,7 +31,8 @@ module Rewards
           Actions::Accept.new(
             params: params.to_h,
             customers: @customers,
-            recommendations: @recommendations
+            recommendations: @recommendations,
+            rewarder: @rewarder
           )
         when Params::Recommend
           Actions::Recommend.new(

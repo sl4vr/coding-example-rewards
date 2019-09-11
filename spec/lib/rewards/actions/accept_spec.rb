@@ -38,6 +38,8 @@ describe Rewards::Actions::Accept do
 
   let(:recommendations) { [recommendation_a_d, recommendation_b_d] }
 
+  let(:rewarder) { Rewards::Rewarder.new(recommendation_repo) }
+
   let(:recommended_name) { 'D' }
   subject(:action) do
     Rewards::Actions::Accept.new(
@@ -45,7 +47,8 @@ describe Rewards::Actions::Accept do
         customer_name: recommended_name
       },
       customers: customer_repo,
-      recommendations: recommendation_repo
+      recommendations: recommendation_repo,
+      rewarder: rewarder
     )
   end
 
@@ -80,17 +83,9 @@ describe Rewards::Actions::Accept do
 
     it 'runs rewarder for new customer' do
       customer_d = customer_repo.create('D')
-      expect(customer_repo).to receive(:create).and_return(customer_d)
+      allow(customer_repo).to receive(:create).and_return(customer_d)
 
-      expect(Rewards::Rewarder).to receive(:new)
-        .with(customer_d, recommendations: recommendation_repo)
-        .and_return(
-          Rewards::Rewarder.new(
-            customer_d,
-            recommendations: recommendation_repo
-            )
-          )
-      expect_any_instance_of(Rewards::Rewarder).to receive(:reward)
+      expect(rewarder).to receive(:reward_for).with(customer_d)
 
       action_perform
     end

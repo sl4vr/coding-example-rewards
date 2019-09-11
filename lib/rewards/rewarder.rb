@@ -3,13 +3,12 @@
 module Rewards
   # Rewards customers in recommendation chain
   class Rewarder
-    def initialize(customer, recommendations:)
-      @customer = customer
+    def initialize(recommendations)
       @recommendations = recommendations
     end
 
-    def reward
-      reward_customer(@customer)
+    def reward_for(customer)
+      reward_customer(customer)
     end
 
     private
