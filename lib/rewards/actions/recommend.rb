@@ -8,20 +8,23 @@ module Rewards
       CustomerNotFoundError = Class.new(RecommendError)
       RecommendationCreationError = Class.new(RecommendError)
 
-      def initialize(params:)
+      def initialize(params:, customers:, recommendations:)
         @created_at = params[:created_at] || Time.now
         @customer_name = params[:customer_name]
         @recommended_name = params[:recommended_name]
+
+        @customers = customers
+        @recommendations = recommendations
       end
 
-      def perform(customers:, recommendations:)
-        customer = customers.find_or_create(@customer_name)
+      def perform
+        customer = @customers.find_or_create(@customer_name)
 
         unless customer
           raise CustomerNotFoundError, "Customer #{@customer_name} not found"
         end
 
-        recommendations.create(
+        @recommendations.create(
           customer: customer,
           recommended_name: @recommended_name,
           created_at: @created_at

@@ -27,11 +27,20 @@ module Rewards
       action =
         case params
         when Params::Accept
-          Actions::Accept.new(params: params.to_h)
+          Actions::Accept.new(
+            params: params.to_h,
+            customers: @customers,
+            recommendations: @recommendations
+          )
         when Params::Recommend
-          Actions::Recommend.new(params: params.to_h)
+          Actions::Recommend.new(
+            params: params.to_h,
+            customers: @customers,
+            recommendations: @recommendations
+          )
         end
-      action.perform(customers: @customers, recommendations: @recommendations)
+
+      action.perform
     rescue  Actions::Accept::AcceptError,
             Actions::Recommend::RecommendError
     end

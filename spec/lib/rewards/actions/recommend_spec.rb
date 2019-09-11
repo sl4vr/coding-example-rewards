@@ -47,17 +47,14 @@ describe Rewards::Actions::Recommend do
         customer_name: customer_name,
         recommended_name: recommended_name,
         created_at: created_at
-      }
+      },
+      customers: customer_repo,
+      recommendations: recommendation_repo
     )
   end
 
   describe '#perform' do
-    subject(:action_perform) do
-      action.perform(
-        customers: customer_repo,
-        recommendations: recommendation_repo
-      )
-    end
+    subject(:action_perform) { action.perform }
 
     it 'creates recommendation with data provided' do
       action_perform

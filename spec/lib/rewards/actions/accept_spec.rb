@@ -43,17 +43,14 @@ describe Rewards::Actions::Accept do
     Rewards::Actions::Accept.new(
       params: {
         customer_name: recommended_name
-      }
+      },
+      customers: customer_repo,
+      recommendations: recommendation_repo
     )
   end
 
   describe '#perform' do
-    subject(:action_perform) do
-      action.perform(
-        customers: customer_repo,
-        recommendations: recommendation_repo
-      )
-    end
+    subject(:action_perform) { action.perform }
 
     it 'creates customer with customer name' do
       action_perform
