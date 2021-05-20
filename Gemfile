@@ -19,7 +19,7 @@ gem 'rake', require: false # avoid namespace conflict
 gem 'sinatra', '2.0.5'
 
 # All awesome rails features
-gem 'activesupport', '5.2.3'
+gem 'activesupport', '5.2.4.3'
 
 group :development, :test do
   # Manager for Procfile-based applications
