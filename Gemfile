@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.6.3'
 
 # Concurrent Ruby web server
-gem 'puma', '4.3.8'
+gem 'puma', '4.3.9'
 
 # Rack middleware which aborts requests running too long
 gem 'rack-timeout', '0.5.1'
