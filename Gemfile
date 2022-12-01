@@ -16,7 +16,7 @@ gem 'rubocop', '~> 0.74.0', require: false
 gem 'rake', require: false # avoid namespace conflict
 
 # DSL for quickly creating web applications
-gem 'sinatra', '2.2.0'
+gem 'sinatra', '2.2.3'
 
 # All awesome rails features
 gem 'activesupport', '5.2.4.3'
